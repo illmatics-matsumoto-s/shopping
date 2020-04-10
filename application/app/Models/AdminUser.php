@@ -50,6 +50,14 @@ class AdminUser extends Authenticatable
         self::UPDATED_AT => '更新日時',
     ];
 
+    // カラムに格納される値と表示値の定義
+    private $multiValues = [
+        self::IS_OWNER => [
+            true  => 'オーナー',
+            false => '一般'
+        ],
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -67,4 +75,24 @@ class AdminUser extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    /**
+     * オーナ状態のステータスを取得する
+     *
+     * @return string
+     */
+    public function getIsOwnerStatusAttribute(){
+
+        // カラムに格納される値と表示値の定義がされていない場合
+        if(!$this->multiValues)
+            return null;
+
+        // IS_OWNERに格納される値と表示値の定義がされている場合、
+        // オーナ情報のステータスを返す。
+        if (array_key_exists($this->is_owner,$this->multiValues[self::IS_OWNER]))
+            return $this->multiValues[self::IS_OWNER][$this->is_owner];
+
+        return null;
+    }
+
 }

@@ -60,6 +60,11 @@
                             メニュー2
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('admin.users.search')}}">
+                            管理者管理
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
