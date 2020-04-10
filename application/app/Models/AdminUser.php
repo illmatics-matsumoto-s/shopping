@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Traits\ColumnName;
 
 /**
  * App\Models\AdminUser
@@ -26,6 +27,29 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class AdminUser extends Authenticatable
 {
+    // 論理名を取得するトレイトを使用する。
+    use ColumnName;
+
+    // 定数：カラム物理名
+    const ID='id';
+    const NAME='name';
+    const EMAIL='email';
+    const PASSWORD='password';
+    const IS_OWNER='is_owner';
+    const CREATED_AT='created_at';
+    const UPDATED_AT='updated_at';
+
+    // 定数：カラム論理名
+    private $columnLogicNames = [
+        self::ID => 'ID',
+        self::NAME => '名称',
+        self::EMAIL => 'メールアドレス',
+        self::PASSWORD => 'パスワード',
+        self::IS_OWNER => 'オーナー',
+        self::CREATED_AT => '作成日時',
+        self::UPDATED_AT => '更新日時',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
