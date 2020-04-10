@@ -40,7 +40,7 @@ class AdminUser extends Authenticatable
     const UPDATED_AT='updated_at';
 
     // 定数：カラム論理名
-    private $columnLogicNames = [
+    const COLUMNS_LOGIC_NAME = [
         self::ID => 'ID',
         self::NAME => '名称',
         self::EMAIL => 'メールアドレス',
@@ -48,6 +48,14 @@ class AdminUser extends Authenticatable
         self::IS_OWNER => 'オーナー',
         self::CREATED_AT => '作成日時',
         self::UPDATED_AT => '更新日時',
+    ];
+
+    // カラムに格納される値と表示値の定義
+    private $multiValues = [
+        self::IS_OWNER => [
+            true  => 'オーナー',
+            false => '一般'
+        ],
     ];
 
     /**
@@ -67,4 +75,24 @@ class AdminUser extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    /**
+     * オーナ状態のステータスを取得する
+     *
+     * @return string
+     */
+    public function getIsOwnerStatusAttribute(){
+
+        // カラムに格納される値と表示値の定義がされていない場合
+        if(!$this->multiValues)
+            return null;
+
+        // IS_OWNERに格納される値と表示値の定義がされている場合、
+        // オーナ情報のステータスを返す。
+        if (array_key_exists($this->is_owner,$this->multiValues[self::IS_OWNER]))
+            return $this->multiValues[self::IS_OWNER][$this->is_owner];
+
+        return null;
+    }
+
 }

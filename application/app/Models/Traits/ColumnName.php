@@ -18,10 +18,10 @@ trait ColumnName
      * @param $name
      * @return |null
      */
-    public function getLogicName($name){
+    static function getLogicName($name){
 
-        if (array_key_exists($name,$this->columnLogicNames)){
-            return $this->columnLogicNames[$name];
+        if (array_key_exists($name,self::COLUMNS_LOGIC_NAME)){
+            return self::COLUMNS_LOGIC_NAME[$name];
         }
 
         return null;

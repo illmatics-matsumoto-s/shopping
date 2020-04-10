@@ -29,6 +29,11 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
     Route::middleware('auth:admin')->group(function () {
         Route::post('logout', 'LoginController@logout')->name('logout');
         Route::get('home', 'HomeController@index')->name('home');
+
+        // 管理者管理
+        Route::prefix('admin_users')->as('users.')->group(function () {
+            Route::get('/', 'AdminUsersController@index')->name('search');
+        });
     });
 });
 
