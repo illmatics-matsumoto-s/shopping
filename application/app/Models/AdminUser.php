@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Traits\ColumnNameable;
+use App\Models\Traits\ForwardMatchable;
+use App\Models\Traits\FuzzySearchable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Traits\ColumnName;
+use Illuminate\Support\Str;
 
 /**
  * App\Models\AdminUser
@@ -12,8 +15,10 @@ use App\Models\Traits\ColumnName;
  * @property string $name
  * @property string $email
  * @property string $password
+ * @property bool $is_owner
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $user_role
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdminUser newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdminUser newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdminUser query()
@@ -23,39 +28,43 @@ use App\Models\Traits\ColumnName;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdminUser whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdminUser wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdminUser whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdminUser forwardMatch(string $column, string$word)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdminUser fuzzySearch(string $column, string $word)
+ * @method static string idPhysical()
+ * @method static string namePhysical()
+ * @method static string emailPhysical()
+ * @method static string passwordPhysical()
+ * @method static string isOwnerPhysical()
+ * @method static string createdAtPhysical()
+ * @method static string updatedAtPhysical()
+ * @method static string idLogical()
+ * @method static string nameLogical()
+ * @method static string emailLogical()
+ * @method static string passwordLogical()
+ * @method static string isOwnerLogical()
+ * @method static string createdAtLogical()
+ * @method static string updatedAtLogical()
  * @mixin \Eloquent
  */
 class AdminUser extends Authenticatable
 {
-    // 論理名を取得するトレイトを使用する。
-    use ColumnName;
+    use ColumnNameable,
+        ForwardMatchable,
+        FuzzySearchable;
 
-    // 定数：カラム物理名
-    const ID='id';
-    const NAME='name';
-    const EMAIL='email';
-    const PASSWORD='password';
-    const IS_OWNER='is_owner';
-    const CREATED_AT='created_at';
-    const UPDATED_AT='updated_at';
-
-    // 定数：カラム論理名
-    const COLUMNS_LOGIC_NAME = [
-        self::ID => 'ID',
-        self::NAME => '名称',
-        self::EMAIL => 'メールアドレス',
-        self::PASSWORD => 'パスワード',
-        self::IS_OWNER => 'オーナー',
-        self::CREATED_AT => '作成日時',
-        self::UPDATED_AT => '更新日時',
-    ];
-
-    // カラムに格納される値と表示値の定義
-    private $multiValues = [
-        self::IS_OWNER => [
-            true  => 'オーナー',
-            false => '一般'
-        ],
+    /**
+     * カラム名のマッピング
+     * key: 物理名
+     * value: 論理名
+     */
+    private const COLUMN_NAMES = [
+        'id' => 'ID',
+        'name' => '名称',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
+        'is_owner' => 'オーナー',
+        'created_at' => '作成日時',
+        'updated_at' => '更新日時',
     ];
 
     /**
@@ -64,7 +73,10 @@ class AdminUser extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','is_owner'
+        'name',
+        'email',
+        'password',
+        'is_owner',
     ];
 
     /**
@@ -77,22 +89,35 @@ class AdminUser extends Authenticatable
     ];
 
     /**
-     * オーナ状態のステータスを取得する
+     * ユーザーの役割を取得する
      *
      * @return string
+     * @noinspection PhpUnused
      */
-    public function getIsOwnerStatusAttribute(){
-
-        // カラムに格納される値と表示値の定義がされていない場合
-        if(!$this->multiValues)
-            return null;
-
-        // IS_OWNERに格納される値と表示値の定義がされている場合、
-        // オーナ情報のステータスを返す。
-        if (array_key_exists($this->is_owner,$this->multiValues[self::IS_OWNER]))
-            return $this->multiValues[self::IS_OWNER][$this->is_owner];
-
-        return null;
+    public function getUserRoleAttribute(): string
+    {
+        return $this->is_owner ? 'オーナー' : '一般';
     }
 
+    /**
+     * @param string $method
+     * @param array $parameters
+     * @return mixed
+     *
+     * Todo: __callにメソッドを登録する処理をTraitに委譲したい
+     */
+    public function __call($method, $parameters)
+    {
+        if (Str::endsWith($method, 'Physical')) {
+            $column = Str::before($method, 'Physical');
+            return static::findPhysicalName($column);
+        }
+
+        if (Str::endsWith($method, 'Logical')) {
+            $column = Str::before($method, 'Logical');
+            return static::findLogicalName($column);
+        }
+
+        return parent::__call($method, $parameters);
+    }
 }
