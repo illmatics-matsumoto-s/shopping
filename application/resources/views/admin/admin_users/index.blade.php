@@ -10,7 +10,7 @@
                        name="name"
                        type="text"
                        class="form-control"
-                       value="{{$conditions['name']}}"
+                       value="{{request('name')}}"
                        placeholder="{{\App\Models\AdminUser::nameLogical()}}"
                        autofocus>
             </div>
@@ -20,7 +20,7 @@
                        name="email"
                        type="text"
                        class="form-control"
-                       value="{{$conditions['email']}}"
+                       value="{{request('email')}}"
                        placeholder="{{\App\Models\AdminUser::emailLogical()}}">
             </div>
         </div>
@@ -30,8 +30,8 @@
             <div class="col-md-12 mb-3">
             @foreach ($radioIsOwners as $index => $value)
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="is-owner{{$index}}" name="is_owner" @if($conditions['is_owner']==$index) checked="checked" @endif value="{{$index}}" class="custom-control-input">
-                <label class="custom-control-label" for="is-owner{{$index}}">{{$value}}</label>
+                <input type="radio" id="is-owner-{{$index}}" name="authority" @if(request('authority')==$index) checked="checked" @endif value="{{$index}}" class="custom-control-input">
+                <label class="custom-control-label" for="is-owner-{{$index}}">{{$value}}</label>
             </div>
             @endforeach
             </div>
@@ -42,7 +42,7 @@
             <div class="col-md-4 mb-3">
                 <select class="form-control" id="sort_key" name="sort_key">
                     @foreach ($selectSortKeys as $index => $value)
-                    <option value="{{$index}}" @if($conditions['sort_key']==$index) selected="selected" @endif >並び替え:{{$value}}</option>
+                    <option value="{{$index}}" @if(request('sort_key')==$index) selected="selected" @endif >並び替え:{{$value}}</option>
                     @endforeach
                 </select>
             </div>
@@ -51,7 +51,7 @@
             <div class="col-md-4 mb-3">
                 <select class="form-control" id="sort_direction" name="sort_direction">
                     @foreach ($selectSorts as $index => $value)
-                    <option value="{{$index}}" @if($conditions['sort_direction']==$index) selected="selected" @endif >並び替え方向:{{$value}}</option>
+                    <option value="{{$index}}" @if(request('sort_direction')==$index) selected="selected" @endif >並び替え方向:{{$value}}</option>
                     @endforeach
                 </select>
             </div>
@@ -60,7 +60,7 @@
             <div class="col-md-2 mb-3">
                 <select class="form-control" id="page_unit" name="page_unit">
                     @foreach ($selectSortNums as $index => $value)
-                    <option value="{{$index}}"@if($conditions['page_unit']==$index) selected="selected" @endif >表示:{{$value}}</option>
+                    <option value="{{$index}}"@if(request('page_unit')==$index) selected="selected" @endif >表示:{{$value}}</option>
                     @endforeach
                 </select>
             </div>
@@ -95,12 +95,12 @@
                 <th>{{$adminUser->id}}</th>
                 <td><a>{{$adminUser->name}}</a></td>
                 <td>{{$adminUser->email}}</td>
-                <td>{{$adminUser->getIsOwnerStatusAttribute()}}</td>
+                <td>{{$adminUser->getUserRoleAttribute()}}</td>
             </tr>
             @endforeach
             </tbody>
         </table>
     </div>
-    {{$adminUsers->appends($conditions)->links()}}
+    {{$adminUsers->links()}}
 
 @endsection

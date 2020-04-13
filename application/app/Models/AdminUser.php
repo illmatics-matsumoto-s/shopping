@@ -35,32 +35,19 @@ class AdminUser extends Authenticatable
         ForwardMatchable,
         FuzzySearchable;
 
-    // 定数：カラム物理名
-    const ID='id';
-    const NAME='name';
-    const EMAIL='email';
-    const PASSWORD='password';
-    const IS_OWNER='is_owner';
-    const CREATED_AT='created_at';
-    const UPDATED_AT='updated_at';
-
-    // 定数：カラム論理名
-    private const COLUMNS_LOGIC_NAME = [
-        self::ID => 'ID',
-        self::NAME => '名称',
-        self::EMAIL => 'メールアドレス',
-        self::PASSWORD => 'パスワード',
-        self::IS_OWNER => 'オーナー',
-        self::CREATED_AT => '作成日時',
-        self::UPDATED_AT => '更新日時',
-    ];
-
-    // カラムに格納される値と表示値の定義
-    private $multiValues = [
-        self::IS_OWNER => [
-            true  => 'オーナー',
-            false => '一般'
-        ],
+    /**
+     * カラム名のマッピング
+     * key: 物理名
+     * value: 論理名
+     */
+    private const COLUMN_NAMES = [
+        'id' => 'ID',
+        'name' => '名称',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
+        'is_owner' => 'オーナー',
+        'created_at' => '作成日時',
+        'updated_at' => '更新日時',
     ];
 
     /**
@@ -82,22 +69,14 @@ class AdminUser extends Authenticatable
     ];
 
     /**
-     * オーナ状態のステータスを取得する
+     * ユーザーの役割を取得する
      *
      * @return string
+     * @noinspection PhpUnused
      */
-    public function getIsOwnerStatusAttribute(){
-
-        // カラムに格納される値と表示値の定義がされていない場合
-        if(!$this->multiValues)
-            return null;
-
-        // IS_OWNERに格納される値と表示値の定義がされている場合、
-        // オーナ情報のステータスを返す。
-        if (array_key_exists($this->is_owner,$this->multiValues[self::IS_OWNER]))
-            return $this->multiValues[self::IS_OWNER][$this->is_owner];
-
-        return null;
+    public function getUserRoleAttribute(): string
+    {
+        return $this->is_owner ? 'オーナー' : '一般';
     }
 
     /**

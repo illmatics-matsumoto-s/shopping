@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\AdminUser;
-use Illuminate\Http\Request;
-use App\Services\Admin\AdminUserManagementService;
+use App\Http\Requests\Admin\AdminUserSearchRequest;
+use App\Services\Domain\Admin\AdminUserManagementService;
+use App\Services\Domain\Admin\AdminUserManagementSearchService;
 use App\Http\Controllers\Controller;
 
 class AdminUsersController extends Controller
@@ -31,31 +31,20 @@ class AdminUsersController extends Controller
     /**
      * Action:search
      *
-     * @param Request $request
+     * @param AdminUserSearchRequest $request
+     * @param adminUserManagementSearchService $adminUserManagementSearchService
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(AdminUserSearchRequest $request, AdminUserManagementSearchService $adminUserManagementSearchService)
     {
-        $conditions = [];
-        $conditions = [
-            'name'  => $request->input('name',''),
-            'email' => $request->input('email',''),
-            'is_owner' => $request->input('is_owner','0'),
-            'sort_key' => $request->input('sort_key',AdminUser::ID),
-            'sort_direction' => $request->input('sort_direction','asc'),
-            'page_unit' => $request->input('page_unit',10),
-        ];
+        $request->validated();
 
-        // 管理者を検索
-        $adminUsers = $this->adminUserManagement->search($conditions);
-
-        return view('admin.admin_users.index',[
+        return view('admin.admin_users.index', [
             'radioIsOwners' => $this->radioIsOwners,
             'selectSortKeys' => $this->selectSortKeys,
             'selectSorts' => $this->selectSorts,
             'selectSortNums' => $this->selectSortNums,
-            'adminUsers' => $adminUsers,
-            'conditions' => $conditions
+            'adminUsers' => $adminUserManagementSearchService($request),
         ]);
     }
 
