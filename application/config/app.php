@@ -175,6 +175,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * Shopping専用のサービスプロバイダ
+         *
+         */
+        App\Providers\Admin\AdminUserManagementServiceProvider::class, // 管理者管理サービス
+
     ],
 
     /*
