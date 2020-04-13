@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Traits\ColumnName;
+use App\Models\Traits\ColumnNameable;
 use App\Models\Traits\ForwardMatchable;
 use App\Models\Traits\FuzzySearchable;
 
@@ -30,7 +30,7 @@ use App\Models\Traits\FuzzySearchable;
 class AdminUser extends Authenticatable
 {
     // 論理名を取得するトレイトを使用する。
-    use ColumnName,
+    use ColumnNameable,
         ForwardMatchable,
         FuzzySearchable;
 
@@ -44,7 +44,7 @@ class AdminUser extends Authenticatable
     const UPDATED_AT='updated_at';
 
     // 定数：カラム論理名
-    const COLUMNS_LOGIC_NAME = [
+    private const COLUMNS_LOGIC_NAME = [
         self::ID => 'ID',
         self::NAME => '名称',
         self::EMAIL => 'メールアドレス',
