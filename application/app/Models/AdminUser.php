@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Traits\ColumnName;
+use App\Models\Traits\ForwardMatchable;
+use App\Models\Traits\FuzzySearchable;
 
 /**
  * App\Models\AdminUser
@@ -28,7 +30,9 @@ use App\Models\Traits\ColumnName;
 class AdminUser extends Authenticatable
 {
     // 論理名を取得するトレイトを使用する。
-    use ColumnName;
+    use ColumnName,
+        ForwardMatchable,
+        FuzzySearchable;
 
     // 定数：カラム物理名
     const ID='id';
