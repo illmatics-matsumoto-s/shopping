@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Traits\ColumnNameable;
 use App\Models\Traits\ForwardMatchable;
 use App\Models\Traits\FuzzySearchable;
+use Illuminate\Support\Str;
 
 /**
  * App\Models\AdminUser
@@ -97,6 +98,29 @@ class AdminUser extends Authenticatable
             return $this->multiValues[self::IS_OWNER][$this->is_owner];
 
         return null;
+    }
+
+    /**
+     * @param string $method
+     * @param array $parameters
+     * @return mixed
+     *
+     */
+    public function __call($method, $parameters)
+    {
+        // 物理名取得メソッドを登録する
+        if (Str::endsWith($method, 'Physical')) {
+            $column = Str::before($method, 'Physical');
+            return static::findPhysicalName($column);
+        }
+
+        // 論理名取得メソッドを登録する
+        if (Str::endsWith($method, 'Logical')) {
+            $column = Str::before($method, 'Logical');
+            return static::findLogicalName($column);
+        }
+
+        return parent::__call($method, $parameters);
     }
 
 }

@@ -11,7 +11,7 @@
                        type="text"
                        class="form-control"
                        value="{{$conditions['name']}}"
-                       placeholder="{{\App\Models\AdminUser::getLogicName('name')}}"
+                       placeholder="{{\App\Models\AdminUser::nameLogical()}}"
                        autofocus>
             </div>
             {{-- メールアドレス --}}
@@ -21,7 +21,7 @@
                        type="text"
                        class="form-control"
                        value="{{$conditions['email']}}"
-                       placeholder="{{\App\Models\AdminUser::getLogicName('email')}}">
+                       placeholder="{{\App\Models\AdminUser::emailLogical()}}">
             </div>
         </div>
 
