@@ -41,29 +41,42 @@
         <div class="form-row">
             {{-- 並び替え --}}
             <div class="col-md-4 mb-3">
-                <select class="form-control" id="sort_key" name="sort_key">
-                    @foreach ($selectSortKeys as $index => $value)
-                    <option value="{{$index}}" @if(request('sort_key')==$index) selected="selected" @endif >並び替え:{{$value}}</option>
-                    @endforeach
-                </select>
+                <admin-search-select-box
+                    id="sort_key"
+                    name="sort_key"
+                    placeholder-text="並び替え"
+                    {{request('sort_key')}}
+                    {{-- todo: デフォルト値を設定する方法を見直す --}}
+                    selected-index="@if(request('sort_key')){{request('sort_key')}}@else{{\App\Services\Domain\Admin\AdminUserManagementService::findName('sort_key')}}@endif"
+                    v-bind:values="{{json_encode($selectSortKeys)}}"
+                >
+                </admin-search-select-box>
             </div>
 
             {{-- 並び替え方向 --}}
             <div class="col-md-4 mb-3">
-                <select class="form-control" id="sort_direction" name="sort_direction">
-                    @foreach ($selectSorts as $index => $value)
-                    <option value="{{$index}}" @if(request('sort_direction')==$index) selected="selected" @endif >並び替え方向:{{$value}}</option>
-                    @endforeach
-                </select>
+                <admin-search-select-box
+                    id="sort_direction"
+                    name="sort_direction"
+                    placeholder-text="並び替え方向"
+                    {{-- todo: デフォルト値を設定する方法を見直す --}}
+                    selected-index="@if(request('sort_direction')){{request('sort_direction')}}@else{{\App\Services\Domain\Admin\AdminUserManagementService::findName('sort_direction')}}@endif"
+                    v-bind:values="{{json_encode($selectSorts)}}"
+                >
+                </admin-search-select-box>
             </div>
 
             {{-- 並び替え数--}}
             <div class="col-md-2 mb-3">
-                <select class="form-control" id="page_unit" name="page_unit">
-                    @foreach ($selectSortNums as $index => $value)
-                    <option value="{{$index}}"@if(request('page_unit')==$index) selected="selected" @endif >表示:{{$value}}</option>
-                    @endforeach
-                </select>
+                <admin-search-select-box
+                    id="page_unit"
+                    name="page_unit"
+                    placeholder-text="表示"
+                    {{-- todo: デフォルト値を設定する方法を見直す --}}
+                    selected-index="@if(request('page_unit')){{request('page_unit')}}@else{{\App\Services\Domain\Admin\AdminUserManagementService::findName('page_unit')}}@endif"
+                    v-bind:values="{{json_encode($selectSortNums)}}"
+                >
+                </admin-search-select-box>
             </div>
 
             {{-- 検索 --}}

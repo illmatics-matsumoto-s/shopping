@@ -3,6 +3,7 @@
 namespace App\Services\Domain\Admin;
 
 use App\Models\AdminUser as AdminUser;
+use App\Services\Domain\Admin\Traits\DefaultContitionGettable;
 
 /**
  * Class AdminUserManagementService
@@ -12,8 +13,18 @@ use App\Models\AdminUser as AdminUser;
  */
 class AdminUserManagementService
 {
+
+    use DefaultContitionGettable;
+
     // モデル
     private $adminUser;
+
+    // デフォルトの検索条件
+    private const DEFAULT_SEARCH_CONDITIONS = [
+        'sort_key' => 'id',
+        'sort_direction' => 'asc',
+        'page_unit' => '10'
+    ];
 
     /**
      * AdminUserManagementService constructor.
