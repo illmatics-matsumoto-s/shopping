@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+<div id="app">
     <form class="shadow p-3 mt-3" method="GET" action="{{ route('admin.users.search') }}">
         @csrf
         <div class="form-row">
@@ -79,28 +80,10 @@
     </ul>
 
     {{-- 管理者一覧 --}}
-    <div class="pt-2">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">名称</th>
-                <th scope="col">メールアドレス</th>
-                <th scope="col">権限</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($adminUsers as $adminUser)
-            <tr>
-                <th>{{$adminUser->id}}</th>
-                <td><a>{{$adminUser->name}}</a></td>
-                <td>{{$adminUser->email}}</td>
-                <td>{{$adminUser->getUserRoleAttribute()}}</td>
-            </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
+    <admin-user-list
+        v-bind:users="{{$adminUsers->toJson()}}"
+    ></admin-user-list>
     {{$adminUsers->links()}}
 
+</div>
 @endsection
