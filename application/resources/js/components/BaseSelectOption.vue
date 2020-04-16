@@ -1,20 +1,19 @@
 <template>
-    <option v-bind:value=value>{{ text }}</option>
+  <option v-bind:value=value>{{ text }}</option>
 </template>
 
 <script>
 export default {
-    name: "BaseSelectOption",
-    props: {
-        value: {
-            type:String,
-            required:true,
-        },
-        text: {
-            type:String,
-            required:true,
-        },
+  props: {
+    value: {
+      type:String,
+      required:true,
     },
+    text: {
+      type:String,
+      required:true,
+    },
+  },
 }
 </script>
 

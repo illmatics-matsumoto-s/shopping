@@ -1,48 +1,47 @@
 <template>
-    <select class="form-control"
-            v-model=selected
-            v-bind:id=id
-            v-bind:name=name
-    >
-        <search-input-sort-key-select-option
-            v-for="(value,index) in values"
-            v-bind:key="value"
-            v-bind:value="index"
-            v-bind:strValue="value"
-            v-bind:placeholder="placeholder"
-        ></search-input-sort-key-select-option>
-    </select>
+  <select class="form-control"
+      v-model=selected
+      v-bind:id=id
+      v-bind:name=name
+  >
+    <search-input-sort-key-select-option
+      v-for="(value,index) in values"
+      v-bind:key="value"
+      v-bind:value="index"
+      v-bind:strValue="value"
+      v-bind:placeholder="placeholder"
+    ></search-input-sort-key-select-option>
+  </select>
 </template>
 
 <script>
 import SearchInputSortKeySelectOption from "./SearchInputSortKeySelectOption";
 export default {
-    name: "SearchInputSortKeySelect",
-    components: {SearchInputSortKeySelectOption},
-    props: {
-        sortKey:{
-            type:String,
-            default:'id',
-            validator:function (value) {
-                return ['id', 'name', 'email'].indexOf(value) !== -1
-            },
-        },
+  components: {SearchInputSortKeySelectOption},
+  props: {
+  sortKey:{
+    type:String,
+    default:'id',
+    validator:function (value) {
+    return ['id', 'name', 'email'].indexOf(value) !== -1
+    },
+  },
 
+  },
+  data:function () {
+  return {
+    id : 'sort_key',
+    name: 'sort_key',
+    prefix: 'sort_key',
+    values:{
+    'id' : 'ID',
+    'name' : '名称',
+    'email' : 'メールアドレス',
     },
-    data:function () {
-        return {
-            id : 'sort_key',
-            name: 'sort_key',
-            prefix: 'sort_key',
-            values:{
-                'id' : 'ID',
-                'name' : '名称',
-                'email' : 'メールアドレス',
-            },
-            placeholder: '並び替え',
-            selected:this.sortKey,
-        }
-    },
+    placeholder: '並び替え',
+    selected:this.sortKey,
+  }
+  },
 }
 </script>
 
