@@ -14,7 +14,7 @@ export default {
     props: {
         value:{
             type:String,
-            default:'id',
+            default:'asc',
             validator:function (value) {
                 return ['asc','desc'].indexOf(value) !== -1
             },
