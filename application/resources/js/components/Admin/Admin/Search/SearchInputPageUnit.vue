@@ -14,7 +14,7 @@ export default {
     components:{SearchInputPageUnitSelect},
     props: {
         pageUnit:{
-            type:String,
+            type:String|null,
             required:true,
         },
     },

@@ -14,7 +14,7 @@ export default {
     components:{SearchInputSortDirectionSelect},
     props: {
         sortDirection:{
-            type:String,
+            type:String|null,
             required:true,
         },
     },

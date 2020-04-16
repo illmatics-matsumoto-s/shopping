@@ -14,7 +14,7 @@ export default {
     components:{SearchInputSortKeySelect},
     props: {
         sortKey:{
-            type:String,
+            type:String|null,
             required:true,
         },
     },
