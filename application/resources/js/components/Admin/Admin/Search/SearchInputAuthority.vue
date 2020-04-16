@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="col-md-12 mb-3">
     <div class="custom-control custom-radio custom-control-inline"  v-for="(strValue,value) in values">
       <SearchInputAuthorityRadio
         prefix="is-owner"
