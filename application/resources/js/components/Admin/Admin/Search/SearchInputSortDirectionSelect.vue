@@ -8,7 +8,7 @@
       v-for="(value,index) in values"
       v-bind:key="value"
       v-bind:value="index"
-      v-bind:strValue="value"
+      v-bind:str-value="value"
       v-bind:placeholder="placeholder"
     ></SearchInputSortDirectionSelectOption>
   </select>

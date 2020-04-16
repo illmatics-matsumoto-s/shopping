@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-4 mb-3">
     <SearchInputSortDirectionSelect
-      v-bind:sortDirection=sortDirection
+      v-bind:sort-direction=sortDirection
     >
     </SearchInputSortDirectionSelect>
   </div>

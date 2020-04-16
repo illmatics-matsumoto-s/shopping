@@ -19,17 +19,17 @@
     <div class="form-row">
       <!-- 並び替え -->
       <SearchInputSortKey
-        v-bind:sortKey="request.sort_key"
+        v-bind:sort-key="request.sort_key"
       ></SearchInputSortKey>
 
       <!-- 並び替え順 -->
       <SearchInputSortDirection
-        v-bind:sortDirection="request.sort_direction"
+        v-bind:sort-direction="request.sort_direction"
       ></SearchInputSortDirection>
 
       <!-- 表示 -->
       <SearchInputPageUnit
-        v-bind:pageUnit="request.page_unit"
+        v-bind:page-unit="request.page_unit"
       ></SearchInputPageUnit>
 
       <!-- 検索 -->
