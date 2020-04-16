@@ -19,17 +19,17 @@
     <div class="form-row">
       <!-- 並び替え -->
       <SearchInputSortKey
-        v-bind:sort-key="request.sort_key"
+        v-bind:sort-key="request.sortKey"
       ></SearchInputSortKey>
 
       <!-- 並び替え順 -->
       <SearchInputSortDirection
-        v-bind:sort-direction="request.sort_direction"
+        v-bind:sort-direction="request.sortDirection"
       ></SearchInputSortDirection>
 
       <!-- 表示 -->
       <SearchInputPageUnit
-        v-bind:page-unit="request.page_unit"
+        v-bind:page-unit="request.pageUnit"
       ></SearchInputPageUnit>
 
       <!-- 検索 -->
@@ -71,16 +71,13 @@ export default {
       authority:{
         type:String,
       },
-      // todo:スネークケースからキャメルにリファクタリングしたい(リクエストの対応)
-      sort_key:{
+      sortKey:{
         type:String,
       },
-      // todo:スネークケースからキャメルにリファクタリング(リクエストの対応)
-      sort_direction:{
+      sortDirection:{
         type:String,
       },
-      // todo:スネークケースからキャメルにリファクタリング(リクエストの対応)
-      page_unit:{
+      pageUnit:{
         type:String,
       },
     },
