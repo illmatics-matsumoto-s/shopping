@@ -30,9 +30,9 @@ export default {
     },
     data:function () {
         return {
-            id : 'sort_direction',
-            name: 'sort_direction',
-            prefix: 'sort_direction',
+            id : 'page_unit',
+            name: 'page_unit',
+            prefix: 'page_unit',
             values:{
                 '10':'10',
                 '20':'20',
