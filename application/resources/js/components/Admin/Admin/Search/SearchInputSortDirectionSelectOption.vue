@@ -1,7 +1,7 @@
 <template>
   <BaseSelectOption
     v-bind:value=value
-    v-bind:text="labelText()"
+    v-bind:text="$_baseSelectLabel_for()"
   >
   </BaseSelectOption>
 </template>
@@ -27,7 +27,7 @@ export default {
     }
   },
   methods:{
-    labelText : function () {
+    $_baseSelectLabel_for : function () {
       return this.placeholder + ":" + this.strValue
     }
   },

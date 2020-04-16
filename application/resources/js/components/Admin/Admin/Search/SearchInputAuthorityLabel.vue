@@ -1,9 +1,8 @@
 <template>
-  <label v-bind:for=$_baseRadioLabel_for(value)
-      class="custom-control-label"
-  >
-    {{text}}
-  </label>
+  <base-radio-label
+    v-bind:for="$_baseRadioLabel_for()"
+    v-bind:text=text
+  ></base-radio-label>
 </template>
 
 <script>
@@ -24,8 +23,8 @@ export default {
     },
   },
   methods :{
-    $_baseRadioLabel_for:function ($_value) {
-      return this.prefix + "-" + $_value
+    $_baseRadioLabel_for:function () {
+      return this.prefix + "-" + this.value
     }
   }
 }
