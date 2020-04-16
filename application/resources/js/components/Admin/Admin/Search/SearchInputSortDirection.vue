@@ -1,9 +1,9 @@
 <template>
   <div class="col-md-4 mb-3">
-    <search-input-sort-direction-select
+    <SearchInputSortDirectionSelect
       v-bind:sortDirection=sortDirection
     >
-    </search-input-sort-direction-select>
+    </SearchInputSortDirectionSelect>
   </div>
 </template>
 

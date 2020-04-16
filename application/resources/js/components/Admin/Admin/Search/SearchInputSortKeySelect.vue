@@ -4,13 +4,13 @@
       v-bind:id=id
       v-bind:name=name
   >
-    <search-input-sort-key-select-option
+    <SearchInputSortKeySelectOption
       v-for="(value,index) in values"
       v-bind:key="value"
       v-bind:value="index"
       v-bind:strValue="value"
       v-bind:placeholder="placeholder"
-    ></search-input-sort-key-select-option>
+    ></SearchInputSortKeySelectOption>
   </select>
 </template>
 

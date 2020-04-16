@@ -1,9 +1,9 @@
 <template>
   <div class="col-md-4 mb-3">
-    <search-input-sort-key-select
+    <SearchInputSortKeySelect
       v-bind:sortKey=sortKey
     >
-    </search-input-sort-key-select>
+    </SearchInputSortKeySelect>
   </div>
 </template>
 

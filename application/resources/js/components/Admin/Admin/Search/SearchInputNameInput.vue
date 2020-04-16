@@ -1,12 +1,12 @@
 <template>
-  <base-input
+  <BaseInput
     name="name"
     id="name"
     v-bind:value=value
     type="text"
     placeholder="名称"
     v-bind:autofocus="true"
-  ></base-input>
+  ></BaseInput>
 </template>
 
 <script>

@@ -1,11 +1,11 @@
 <template>
-  <base-input
+  <BaseInput
     name="email"
     id="email"
     v-bind:value=value
     type="text"
     placeholder="メールアドレス"
-  ></base-input>
+  ></BaseInput>
 </template>
 
 <script>

@@ -1,9 +1,9 @@
 <template>
   <div class="col-md-6 mb-3">
-    <search-input-name-input
+    <SearchInputNameInput
       v-bind:value=name
     >
-    </search-input-name-input>
+    </SearchInputNameInput>
   </div>
 </template>
 

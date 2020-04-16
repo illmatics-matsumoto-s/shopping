@@ -1,18 +1,18 @@
 <template>
   <div>
     <div class="custom-control custom-radio custom-control-inline"  v-for="(strValue,value) in values">
-      <search-input-authority-radio
+      <SearchInputAuthorityRadio
         prefix="is-owner"
         v-bind:value=value
         v-bind:checked=authority
       >
-      </search-input-authority-radio>
+      </SearchInputAuthorityRadio>
 
-      <search-input-authority-label
+      <SearchInputAuthorityLabel
         prefix="is-owner"
         v-bind:text=strValue
         v-bind:value=value
-      ></search-input-authority-label>
+      ></SearchInputAuthorityLabel>
     </div>
   </div>
 </template>

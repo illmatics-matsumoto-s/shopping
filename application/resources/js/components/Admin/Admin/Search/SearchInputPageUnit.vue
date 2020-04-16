@@ -1,9 +1,9 @@
 <template>
   <div class="col-md-2 mb-3">
-    <search-input-page-unit-select
+    <SearchInputPageUnitSelect
       v-bind:pageUnit=pageUnit
     >
-    </search-input-page-unit-select>
+    </SearchInputPageUnitSelect>
   </div>
 </template>
 

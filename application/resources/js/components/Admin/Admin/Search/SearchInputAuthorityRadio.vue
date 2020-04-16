@@ -1,10 +1,10 @@
 <template>
-  <base-radio v-bind:id="$_baseRadio_labelName(value)"
+  <BaseRadio v-bind:id="$_baseRadio_labelName(value)"
         name="authority"
         v-bind:value=value
         v-bind:checked=$_baseRadio_isChecked()
   >
-  </base-radio>
+  </BaseRadio>
 </template>
 
 <script>

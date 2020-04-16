@@ -1,9 +1,9 @@
 <template>
   <div class="col-md-2 mb-3">
-     <base-submit
+     <BaseSubmit
       v-bind:text=text
       v-bind:classes=classes
-     ></base-submit>
+     ></BaseSubmit>
   </div>
 </template>
 

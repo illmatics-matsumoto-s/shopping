@@ -1,9 +1,9 @@
 <template>
-  <base-select-option
+  <BaseSelectOption
     v-bind:value=value
     v-bind:text="labelText()"
   >
-  </base-select-option>
+  </BaseSelectOption>
 </template>
 
 <script>
