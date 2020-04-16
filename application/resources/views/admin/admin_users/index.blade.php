@@ -1,8 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-<div id="app">
-
     {{--  todo:コンポーネント1にまとめる--}}
     <form class="shadow p-3 mt-3" method="GET" action="{{ route('admin.users.search') }}">
         @csrf
@@ -27,6 +25,4 @@
 
     {{--  ページネーション --}}
     {{$adminUsers->links()}}
-
-</div>
 @endsection

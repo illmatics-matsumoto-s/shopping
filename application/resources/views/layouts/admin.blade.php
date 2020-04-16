@@ -70,7 +70,9 @@
         </nav>
 
         <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
-            @yield('content')
+            <div id="app">
+                @yield('content')
+            </div>
         </main>
     </div>
 </div>
