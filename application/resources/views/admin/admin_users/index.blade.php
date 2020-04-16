@@ -21,9 +21,9 @@
 
     {{--  todo:コンポーネント3にまとめる--}}
     {{--  検索結果--}}
-    <admin-admin-search-search-user-list
+    <admin-admin-search-user-list
         v-bind:users="{{ $adminUsers->toJson() }}"
-    ></admin-admin-search-search-user-list>
+    ></admin-admin-search-user-list>
 
     {{--  ページネーション --}}
     {{$adminUsers->links()}}
