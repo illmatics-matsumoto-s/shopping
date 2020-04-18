@@ -60,12 +60,19 @@
                             メニュー2
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('admin.users.search')}}">
+                            管理者管理
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
 
         <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
-            @yield('content')
+            <div id="app">
+                @yield('content')
+            </div>
         </main>
     </div>
 </div>

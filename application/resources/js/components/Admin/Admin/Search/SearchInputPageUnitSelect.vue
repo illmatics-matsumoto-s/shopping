@@ -1,0 +1,50 @@
+<template>
+  <select class="form-control"
+      v-model=selected
+      v-bind:id=id
+      v-bind:name=name
+  >
+    <SearchInputPageUnitSelectOption
+      v-for="(value,index) in values"
+      v-bind:key="value"
+      v-bind:value="index"
+      v-bind:str-value="value"
+      v-bind:placeholder="placeholder"
+    ></SearchInputPageUnitSelectOption>
+  </select>
+</template>
+
+<script>
+import SearchInputPageUnitSelectOption from "./SearchInputPageUnitSelectOption";
+export default {
+  components: {SearchInputPageUnitSelectOption},
+  props: {
+    pageUnit:{
+      type:String,
+      default:'10',
+      validator:function (value) {
+        return ['10','20','50','100'].indexOf(value) !== -1
+      },
+    },
+  },
+  data:function () {
+    return {
+      id : 'page_unit',
+      name: 'page_unit',
+      prefix: 'page_unit',
+      values:{
+        '10':'10',
+        '20':'20',
+        '50':'50',
+        '100':'100',
+      },
+      placeholder: '表示',
+      selected:this.pageUnit,
+    }
+  },
+}
+</script>
+
+<style scoped>
+
+</style>
