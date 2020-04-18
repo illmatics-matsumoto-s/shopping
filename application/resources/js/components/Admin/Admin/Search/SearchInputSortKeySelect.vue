@@ -29,18 +29,18 @@ export default {
 
   },
   data:function () {
-  return {
-    id : 'sort_key',
-    name: 'sort_key',
-    prefix: 'sort_key',
-    values:{
-    'id' : 'ID',
-    'name' : '名称',
-    'email' : 'メールアドレス',
-    },
-    placeholder: '並び替え',
-    selected:this.sortKey,
-  }
+    return {
+      id : 'sort_key',
+      name: 'sort_key',
+      prefix: 'sort_key',
+      values:{
+        'id' : 'ID',
+        'name' : '名称',
+        'email' : 'メールアドレス',
+      },
+      placeholder: '並び替え',
+      selected:this.sortKey,
+    }
   },
 }
 </script>
